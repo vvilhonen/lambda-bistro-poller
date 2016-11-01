@@ -33,7 +33,7 @@ function pdfToJson(pdfBuffer, cb) {
   var data = ''
   const path = '/tmp/menu.pdf'
   fs.writeFileSync(path, pdfBuffer)
-  const child = cp.exec('./pdftohtml -f 1 -l 1 -i -noframes -xml -stdout ' + path, err => {
+  const child = cp.exec('./pdftohtml -enc UTF-8 -f 1 -l 1 -i -noframes -xml -stdout ' + path, err => {
     if (err) return cb(err)
     xml2js.parseString(data, {strict:false}, (err, json) => {
       if (err) return cb(err)
